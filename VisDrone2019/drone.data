@@ -1,7 +1,0 @@
-classes=1
-train = /content/SlimYOLOv3/VisDrone2019/drone/train.lists
-valid = /content/SlimYOLOv3/VisDrone2019/drone/val.lists
-labels = /content/SlimYOLOv3/VisDrone2019/drone/labels.txt
-names = /content/SlimYOLOv3/VisDrone2019/drone/labels.txt
-backup = backup_drone
-eval=coco
