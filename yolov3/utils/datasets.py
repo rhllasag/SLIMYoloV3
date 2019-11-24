@@ -264,7 +264,8 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
 
         n = len(self.img_files)
         bi = np.floor(np.arange(n) / batch_size).astype(np.int)  # batch index
-        nb = bi[-1] + 1  # number of batches
+        print(bi)
+        nb = bi[1] + 1  # number of batches
         assert n > 0, 'No images found in %s' % path
 
         self.n = n
