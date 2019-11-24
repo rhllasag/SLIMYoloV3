@@ -60,8 +60,6 @@ def test(cfg,
     jdict, stats, ap, ap_class = [], [], [], []
     for batch_i, (imgs, targets, paths, shapes) in enumerate(tqdm(dataloader, desc=s)):
         targets = targets.to(device)
-        print(targets)
-        print("targets")
         imgs = imgs.to(device)
         _, _, height, width = imgs.shape  # batch size, channels, height, width
 
@@ -83,6 +81,7 @@ def test(cfg,
         for si, pred in enumerate(output):
             labels = targets[targets[:, 0] == si, 1:]
             nl = len(labels)
+            print(labels)
             tcls = labels[:, 0].tolist() if nl else []  # target class
             seen += 1
 
