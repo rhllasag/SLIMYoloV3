@@ -69,7 +69,8 @@ def test(cfg,
 
         # Run model
         inf_out, train_out = model(imgs)  # inference and training outputs
-
+        print(inf_out)
+        print(train_out)
         # Compute loss
         if hasattr(model, 'hyp'):  # if model has loss hyperparameters
             loss += compute_loss(train_out, targets, model)[1][:3].cpu()  # GIoU, obj, cls
@@ -83,7 +84,6 @@ def test(cfg,
             nl = len(labels)
             tcls = labels[:, 0].tolist() if nl else []  # target class
             seen += 1
-            print(pred)
             if pred is None:
                 if nl:
                     stats.append(([], torch.Tensor(), torch.Tensor(), tcls))
