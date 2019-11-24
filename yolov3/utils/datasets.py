@@ -262,7 +262,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
             self.img_files = [x.replace('/', os.sep) for x in f.read().splitlines()  # os-agnostic
                               if os.path.splitext(x)[-1].lower() in img_formats]
         n = len(self.img_files)
-        print(self.images)
+        print(self.img_files)
         print(n)
         bi = np.floor(np.arange(n) / batch_size).astype(np.int)  # batch index
         nb = bi[1] + 1  # number of batches
