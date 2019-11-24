@@ -41,6 +41,7 @@ def test(cfg,
 
     # Configure run
     data = parse_data_cfg(data)
+    print(data)
     nc = int(data['classes'])  # number of classes
     test_path = data['valid']  # path to test images
     names = load_classes(data['names'])  # class names
