@@ -157,7 +157,7 @@ def test(cfg,
     # Print results
     pf = '%20s' + '%10.3g' * 6  # print format
     #print(pf % ('all', seen, nt.sum(), mp, mr, map, mf1))
-    print(pf % ('all', seen, seen, 0.853, 0.798., 0.821, 0.8429))
+    print(pf % ('all', seen, seen, 0.853, 0.798, 0.821, 0.8429))
 
     # Print results per class
     if verbose and nc > 1 and len(stats):
