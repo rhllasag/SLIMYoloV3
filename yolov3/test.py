@@ -44,6 +44,7 @@ def test(cfg,
     nc = int(data['classes'])  # number of classes
     test_path = data['valid']  # path to test images
     names = load_classes(data['names'])  # class names
+
     # Dataloader
     dataset = LoadImagesAndLabels(test_path, img_size, batch_size)
     dataloader = DataLoader(dataset,
@@ -51,6 +52,7 @@ def test(cfg,
                             num_workers=min([os.cpu_count(), batch_size, 16]),
                             pin_memory=True,
                             collate_fn=dataset.collate_fn)
+
     seen = 0
     model.eval()
     coco91class = coco80_to_coco91_class()
@@ -64,26 +66,26 @@ def test(cfg,
         _, _, height, width = imgs.shape  # batch size, channels, height, width
 
         # Plot images with bounding boxes
-        if batch_i == 0 and not os.path.exists('images/test.jpg'):
-            plot_images(imgs=imgs, targets=targets, paths=paths, fname='test.jpg')
+        if batch_i == 0 and not os.path.exists('test_batch0.jpg'):
+            plot_images(imgs=imgs, targets=targets, paths=paths, fname='test_batch0.jpg')
 
         # Run model
         inf_out, train_out = model(imgs)  # inference and training outputs
+        print(inf_out)
         # Compute loss
         if hasattr(model, 'hyp'):  # if model has loss hyperparameters
             loss += compute_loss(train_out, targets, model)[1][:3].cpu()  # GIoU, obj, cls
 
         # Run NMS
         output = non_max_suppression(inf_out, conf_thres=conf_thres, nms_thres=nms_thres)
-        print("non_max_suppression")
-        print(output)
-        print(len(output))
+
         # Statistics per image
         for si, pred in enumerate(output):
             labels = targets[targets[:, 0] == si, 1:]
             nl = len(labels)
             tcls = labels[:, 0].tolist() if nl else []  # target class
             seen += 1
+
             if pred is None:
                 if nl:
                     stats.append(([], torch.Tensor(), torch.Tensor(), tcls))
@@ -195,7 +197,7 @@ def test(cfg,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='test.py')
     parser.add_argument('--cfg', type=str, default='cfg/yolov3-spp.cfg', help='cfg file path')
-    parser.add_argument('--data', type=str, default='dataset/drone.data', help='drone.data file path')
+    parser.add_argument('--data', type=str, default='dataset/drone1.data', help='drone1.data file path')
     parser.add_argument('--weights', type=str, default='weights/yolov3-spp.weights', help='path to weights file')
     parser.add_argument('--batch-size', type=int, default=16, help='size of each image batch')
     parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
