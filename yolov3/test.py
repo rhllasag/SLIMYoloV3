@@ -41,7 +41,6 @@ def test(cfg,
 
     # Configure run
     data = parse_data_cfg(data)
-    print(data)
     nc = int(data['classes'])  # number of classes
     test_path = data['valid']  # path to test images
     names = load_classes(data['names'])  # class names
@@ -149,6 +148,8 @@ def test(cfg,
 
     # Compute statistics
     stats = [np.concatenate(x, 0) for x in list(zip(*stats))]  # to numpy
+    print("Statistics")
+    print(stats)
     if len(stats):
         p, r, ap, f1, ap_class = ap_per_class(*stats)
         mp, mr, map, mf1 = p.mean(), r.mean(), ap.mean(), f1.mean()
