@@ -68,6 +68,7 @@ def test(cfg,
             plot_images(imgs=imgs, targets=targets, paths=paths, fname='test.jpg')
 
         # Run model
+        print(imgs)
         inf_out, train_out = model(imgs)  # inference and training outputs
         # Compute loss
         if hasattr(model, 'hyp'):  # if model has loss hyperparameters
@@ -144,8 +145,6 @@ def test(cfg,
 
     # Compute statistics
     stats = [np.concatenate(x, 0) for x in list(zip(*stats))]  # to numpy
-    print("Statistics")
-    print(stats)
     if len(stats):
         p, r, ap, f1, ap_class = ap_per_class(*stats)
         mp, mr, map, mf1 = p.mean(), r.mean(), ap.mean(), f1.mean()
