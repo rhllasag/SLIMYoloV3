@@ -44,7 +44,8 @@ def test(cfg,
     nc = int(data['classes'])  # number of classes
     test_path = data['valid']  # path to test images
     names = load_classes(data['names'])  # class names
-
+    print("names")
+    print(names)
     # Dataloader
     dataset = LoadImagesAndLabels(test_path, img_size, batch_size)
     dataloader = DataLoader(dataset,
@@ -52,7 +53,8 @@ def test(cfg,
                             num_workers=min([os.cpu_count(), batch_size, 16]),
                             pin_memory=True,
                             collate_fn=dataset.collate_fn)
-
+    print(dataset)
+    print(dataloader)
     seen = 0
     model.eval()
     coco91class = coco80_to_coco91_class()
