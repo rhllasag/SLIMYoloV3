@@ -68,7 +68,6 @@ def test(cfg,
             plot_images(imgs=imgs, targets=targets, paths=paths, fname='test.jpg')
 
         # Run model
-        print(imgs)
         inf_out, train_out = model(imgs)  # inference and training outputs
         # Compute loss
         if hasattr(model, 'hyp'):  # if model has loss hyperparameters
@@ -76,7 +75,9 @@ def test(cfg,
 
         # Run NMS
         output = non_max_suppression(inf_out, conf_thres=conf_thres, nms_thres=nms_thres)
-
+        print("non_max_suppression")
+        print(output)
+        print(len(output))
         # Statistics per image
         for si, pred in enumerate(output):
             labels = targets[targets[:, 0] == si, 1:]
