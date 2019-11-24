@@ -64,13 +64,11 @@ def test(cfg,
         _, _, height, width = imgs.shape  # batch size, channels, height, width
 
         # Plot images with bounding boxes
-        if batch_i == 0 and not os.path.exists('test_batch0.jpg'):
-            plot_images(imgs=imgs, targets=targets, paths=paths, fname='test_batch0.jpg')
+        if batch_i == 0 and not os.path.exists('images/test.jpg'):
+            plot_images(imgs=imgs, targets=targets, paths=paths, fname='test.jpg')
 
         # Run model
         inf_out, train_out = model(imgs)  # inference and training outputs
-        print(inf_out)
-        print(train_out)
         # Compute loss
         if hasattr(model, 'hyp'):  # if model has loss hyperparameters
             loss += compute_loss(train_out, targets, model)[1][:3].cpu()  # GIoU, obj, cls
