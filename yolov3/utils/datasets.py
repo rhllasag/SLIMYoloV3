@@ -258,13 +258,10 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
     def __init__(self, path, img_size=416, batch_size=16, augment=False, hyp=None, rect=True, image_weights=False,
                  cache_labels=False, cache_images=False):
         path = str(Path(path))  # os-agnostic
-        print(path)
         with open(path, 'r') as f:
             self.img_files = [x.replace('/', os.sep) for x in f.read().splitlines()  # os-agnostic
                               if os.path.splitext(x)[-1].lower() in img_formats]
         n = len(self.img_files)
-        print(self.img_files)
-        print(n)
         bi = np.floor(np.arange(n) / batch_size).astype(np.int)  # batch index
         nb = bi[-1] + 1  # number of batches
         assert n > 0, 'No images found in %s' % path
@@ -284,7 +281,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
         # Rectangular Training  https://github.com/ultralytics/yolov3/issues/232
         if self.rect:
             # Read image shapes
-            sp = 'dataset/drone' + os.sep + path.replace('.txt', '.shapes').split(os.sep)[-1]  # shapefile path
+            sp = 'dataset' + os.sep + path.replace('.txt', '.shapes').split(os.sep)[-1]  # shapefile path
             try:
                 with open(sp, 'r') as f:  # read existing shapefile
                     s = [x.split() for x in f.read().splitlines()]

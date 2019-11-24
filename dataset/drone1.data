@@ -1,7 +1,0 @@
-classes=1
-train = /content/SlimYOLOv3/dataset/drone/train.lists
-valid = /content/SlimYOLOv3/dataset/drone/val1.lists
-labels = /content/SlimYOLOv3/dataset/drone/labels.txt
-names = /content/SlimYOLOv3/dataset/drone/labels.txt
-backup = backup_drone
-eval=coco
