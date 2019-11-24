@@ -81,10 +81,9 @@ def test(cfg,
         for si, pred in enumerate(output):
             labels = targets[targets[:, 0] == si, 1:]
             nl = len(labels)
-            print(labels)
             tcls = labels[:, 0].tolist() if nl else []  # target class
             seen += 1
-
+            print(pred)
             if pred is None:
                 if nl:
                     stats.append(([], torch.Tensor(), torch.Tensor(), tcls))
